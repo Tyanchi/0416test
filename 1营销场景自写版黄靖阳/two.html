@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+  <title>实战1</title>
+  <link rel="stylesheet" href="./index.css"/>
+  <style type="text/css">
+
+  </style>
+
+</head>
+<body>
+  <div id="wrap">
+    <canvas id="mask"></canvas>
+    <ul id="list">
+      <li id="one" >
+        <ul >
+          <li><p>曾经做为前端开发的你</p><p>解决PC兼容性而焦头烂额</p></li>
+          <li><p>而今</p><p>移动端H5应用疯狂来袭</p></li>
+          <li><p>你以为你能学的好吗</p><p>对没错,只要加油</p></li>
+          <li><p>没有什么事情是不可能的</p></li>
+        </ul>
+      </li>
+      <li id="two">
+        <ul id="twoChild">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </li>
+      <li id="three">
+        <div class="threeChild"></div>
+      </li>
+      <li id="four">
+        <ul class="fourUl">
+          <li>transform  transition  rotate  scale  translate  keyframes animation  webkitTransitionEnd webkitAnimationIteration elapsedTime perspective…</li>
+          <li>drawImage lineWidth  strokeStyle  lineCap  globalCompositeOperation  moveTo   lineTo  stroke  arc  getImageData…</li>
+          <li>audio autoplay loop  paused  play  pause…</li>
+        </ul>
+      </li>
+      <li id="five"></li>
+    </ul>
+    <div id="arrow"></div>
+    <div id="music">
+      <audio src="img/music.mp3"  loop></audio>
+    </div>
+  </div>
+
+
+
+</body>
+<script type="text/javascript" src="js/tools.js"></script>
+<script type="text/javascript">
+  //遮罩以及适
+    document.addEventListener("touchstart",function (ev) {
+      var ev = ev||event;
+      ev.preventDefault()
+    });
+//    viewport适配
+    (function () {
+      var targetW = 640;
+      var width = document.documentElement.clientWidth;
+      var scale = width/targetW;
+      var metaNode = document.querySelector("meta[name='viewport']")
+      metaNode.setAttribute("content","initial-scale="+scale+",user-scalable=no");
+    })()
+    //正文
+    window.onload = function () {
+      //遮罩显示隐藏
+      maskMove();
+      function maskMove() {
+        var oc = document.querySelector("#mask")
+        var audio = document.querySelector("#music audio")
+        oc.width = document.documentElement.clientWidth;
+        oc.height = document.documentElement.clientHeight;
+        if(oc.getContext){
+          var ctx = oc.getContext("2d");
+
+          var img =new Image();
+          img.src="img/a.png";
+          img.onload=function(){
+            draw(this);
+          }
+        }
+        function draw(img){
+          ctx.drawImage(img,0,0,oc.width,oc.height);
+
+          oc.addEventListener('touchstart',function(ev){
+            var ev =ev||event;
+            var touchC = ev.changedTouches[0];
+
+            var x = touchC.clientX - this.offsetLeft;
+            var y = touchC.clientY - this.offsetTop;
+
+            ctx.globalCompositeOperation="destination-out";
+            ctx.lineWidth=50;
+            ctx.lineCap="round";
+
+            ctx.beginPath();
+            ctx.moveTo(x,y);
+            ctx.lineTo(x+1,y+1);
+            ctx.stroke();
+
+
+          });
+          oc.addEventListener('touchmove',function(){
+            var ev =ev||event;
+            var touchC = ev.changedTouches[0];
+
+            var x = touchC.clientX - this.offsetLeft;
+            var y = touchC.clientY - this.offsetTop;
+
+            ctx.lineTo(x,y);
+            ctx.stroke();
+          });
+          oc.addEventListener("touchend",function(){
+
+            var imgData = ctx.getImageData(0,0,oc.width,oc.height);
+            var flag =0;
+            var allPx = imgData.width * imgData.height;
+            for(var i=0;i<allPx;i++){
+              if(imgData.data[4*i+3] == 0){
+                flag++;
+              }
+            }
+
+
+            if(flag > allPx/2){
+              oc.style.opacity=0;
+            }
+
+          })
+
+          oc.addEventListener("transitionend",function(){
+            this.remove();
+            upDownMOve();
+            audio.play();
+            console.log(audio.play);
+            document.getElementById('music').onclick = function () {
+              if(audio.paused){
+                audio.play();
+              }else {
+                audio.pause();
+              }
+              return false;
+            }
+          })
+        }
+      }
+
+      //上下滑动
+//      upDownMOve();
+      function upDownMOve() {
+
+        var bigUl = document.getElementById("list");
+        var bigUlList = document.querySelectorAll("#list>li")
+        var one = document.getElementById("one")
+        var two = document.getElementById("two")
+        var three = document.getElementById("three")
+        var four = document.getElementById("four")
+
+        var h = bigUl.offsetHeight;
+        var w = bigUl.offsetWidth;
+//        console.log(h);
+        var now = 0;
+
+        var prevNow = 4;
+        var nextNow = 1;
+        var startY,nowY,endY,scale,disY;
+
+        //手指点击的时候
+        document.addEventListener('touchstart',function(ev) {
+          var ev = ev || event;
+          var touch = ev.changedTouches[0];
+          startY = touch.clientY;
+          bigUlList[now].style.display = "list-item"
+
+        })
+        //手指移动 的时候
+        document.addEventListener('touchmove',function(ev) {
+          var ev = ev || event;
+          var touch = ev.changedTouches[0];
+          nowY = touch.clientY;
+          disY = nowY - startY;
+          scale = 1 - Math.abs(disY/h)/30;
+          if(disY>0){
+            bigUlList[prevNow].style.display = "list-item"
+//            bigUlList[prevNow].style.top = -h + "px"
+            bigUlList[prevNow].style.transform = "translateY("+(-h)+"px)";
+            bigUlList[prevNow].style.zIndex = 5;
+            css(bigUlList[prevNow],"translateY",disY-h)
+            console.log(scale);
+            css(bigUlList[now],"scale",scale)
+            css(bigUlList[now],"translateY",disY/3)
+            css(bigUlList[now],"translateX",disY/5)
+
+          }else if (disY<0){
+            bigUlList[nextNow].style.display = "list-item"
+//            bigUlList[nextNow].style.top = h + "px"
+            bigUlList[nextNow].style.transform = "translateY("+h+"px)";
+            bigUlList[nextNow].style.zIndex = 5;
+            css(bigUlList[nextNow],"translateY",disY+h)
+            css(bigUlList[now],"scale",scale)
+            css(bigUlList[now],"translateY",disY/3)
+            css(bigUlList[now],"translateX",-disY/5)
+          }
+        })
+        //手指松开的时候
+        document.addEventListener('touchend',function(ev) {
+          var ev = ev || event;
+          var touch = ev.changedTouches[0];
+          endY = touch.clientY;
+          disY = endY - startY;
+          if(disY>0){
+            bigUlList[prevNow].style.display = "list-item"
+            bigUlList[nextNow].style.display = "none"
+            css(bigUlList[prevNow],"translateY",0)
+            bigUlList[prevNow].classList.add("translations")
+            setTimeout(function () {
+              css(bigUlList[now],"scale",1)
+              css(bigUlList[now],"translateY",0)
+              css(bigUlList[now],"translateX",0)
+              bigUlList[now].style.display = "none"
+              now = prevNow;
+              if(now==0){
+                prevNow = 4
+                nextNow = 1
+              }else if(now== 4){
+                nextNow = 0
+                prevNow = 3
+              }else{
+                nextNow = now +1
+                prevNow = now -1
+              }
+//              console.log(now);
+              bigUlList[now].className = "none"
+              bigUlList[now].style.zIndex = 0
+//              console.log(prevNow,now,nextNow);
+            },1000)
+          }else if(disY<0){
+
+            bigUlList[nextNow].style.display = "list-item"
+            bigUlList[prevNow].style.display = "none"
+            css(bigUlList[nextNow],"translateY",0)
+            bigUlList[nextNow].classList.add("translations")
+            setTimeout(function () {
+              bigUlList[now].style.display = "none"
+              css(bigUlList[now],"scale",1)
+              css(bigUlList[now],"translateY",0)
+              css(bigUlList[now],"translateX",0)
+              now = nextNow;
+              if(now==0){
+                prevNow = 4
+                nextNow = 1
+              }else if(now== 4){
+                nextNow = 0
+                prevNow = 3
+              }else{
+                nextNow = now +1
+                prevNow = now -1
+              }
+              bigUlList[now].classList.remove("translations");
+              bigUlList[now].style.zIndex = 0;
+              console.log(prevNow,now,nextNow);
+            },1000)
+          }
+        })
+      }
+
+      //出入场动画
+
+      function animationA() {
+        var bigUl = document.getElementById("list");
+        var bigUlList = document.querySelectorAll("#list>li");
+        var one = document.getElementById("one");
+        var two = document.getElementById("two");
+        var three = document.getElementById("three");
+        var four = document.getElementById("four");
+        var child = document.querySelectorAll("#two #twoChild li");
+        var h = bigUl.offsetHeight;
+        var w = bigUl.offsetWidth;
+
+        //设置也一些默认的值
+        var oneP = document.querySelector("#one ul>li:nth-child(1)");
+        var twoP = document.querySelector("#one ul>li:nth-child(2)");
+        var threeP = document.querySelector("#one ul>li:nth-child(3)");
+        var fourP = document.querySelector("#one ul>li:nth-child(4)");
+
+        css(oneP,"translateX",w);
+        css(twoP,"translateX",-w);
+        css(threeP,"translateX",w);
+        css(fourP,"translateX",-w);
+
+        var fourList = document.querySelectorAll("#four .fourUl li")
+        for (var i = 0; i < fourList.length; i++) {
+          fourList[i].style.width = 0 + "px";
+          fourList[i].style.height = 0 + "px";
+        }
+        var x = 100;
+        fourList[0].w = 220/x
+        fourList[0].h = 240/x
+        fourList[1].w = 280/x
+        fourList[1].h = 150/x
+        fourList[2].w = 110/x
+        fourList[2].h = 280/x
+
+
+        var imgRo = document.querySelector("#three .threeChild")
+        imgRo.style.transform = "rotateY(0deg)";
+
+
+        for (var i = 0; i < child.length; i++) {
+          css(child[i],"translateX",w/2-45)
+          css(child[i],"translateY",h/2)
+          css(child[i],"rotate",0)
+        }
+        var animationAttr = [
+          {
+            inA:function () {
+              var one = document.querySelector("#one ul>li:nth-child(1)");
+              var two = document.querySelector("#one ul>li:nth-child(2)");
+              var three = document.querySelector("#one ul>li:nth-child(3)");
+              var four = document.querySelector("#one ul>li:nth-child(4)");
+              css(one,"translateX",0);
+              css(two,"translateX",0);
+              css(three,"translateX",0);
+              css(four,"translateX",0);
+            },
+            outA:function () {
+
+            }
+          },
+          {
+            inA:function () {
+              var child = document.querySelectorAll("#two #twoChild li")
+              for (var i = 0; i < child.length; i++) {
+                css(child[i],"rotate",3600)
+              }
+              css(child[0],"translateX",w*43/100);css(child[0],"translateY",h*30/100);
+              css(child[1],"translateX",w*13/100);css(child[1],"translateY",h*40/100);
+              css(child[2],"translateX",w*73/100);css(child[2],"translateY",h*40/100);
+              css(child[3],"translateX",w*13/100);css(child[3],"translateY",h*65/100);
+              css(child[4],"translateX",w*73/100);css(child[4],"translateY",h*65/100);
+              css(child[5],"translateX",w*43/100);css(child[5],"translateY",h*75/100);
+            },
+            outA:function () {
+              var child = document.querySelectorAll("#two #twoChild li")
+              for (var i = 0; i < child.length; i++) {
+                css(child[i],"translate",0)
+                css(child[i],"rotate",0)
+              }
+//
+
+            }
+
+          },
+          {
+            inA:function () {
+              var imgRo = document.querySelector("#three .threeChild")
+              imgRo.style.transform = "rotateY(3600deg)"
+
+            },
+            outA:function () {
+
+
+            }
+
+          },
+          {
+            inA:function () {
+              var num = 0
+            var timer = setInterval(function () {
+                num++;
+                if(num>100){
+                  clearInterval(timer)
+                }
+                for (var i = 0; i < fourList.length; i++) {
+                  fourList[i].style.width = fourList[i].w*num + "px";
+                  fourList[i].style.height = fourList[i].h*num + "px";
+                }
+              },10)
+            },
+            outA:function () {
+            }
+          }
+        ]
+//        setTimeout(function () {
+//          animationAttr[0]["inA"]();
+//          animationAttr[1]["inA"]();
+//          animationAttr[2]["inA"]();
+//          animationAttr[3]["inA"]();
+//
+//        },5000)
+
+      }
+    }
+
+
+
+</script>
+</html>

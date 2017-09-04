@@ -1,0 +1,223 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, table, th, td, embed, object {
+  padding: 0;
+  margin: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset, img, abbr {
+  border: 0;
+}
+address, caption, cite, code, dfn, em,
+h1, h2, h3, h4, h5, h6, strong, th, var {
+  font-weight: normal;
+  font-style: normal;
+}
+ul {
+  list-style: none;
+}
+caption, th {
+  text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-size: 1.0em;
+}
+q:before, q:after {
+  content: "";
+}
+a, ins {
+  text-decoration: none;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  height: 100%;
+  overflow: hidden;
+}
+#wrap{
+  height: 100%;
+}
+#wrap #list{
+  height: 100%;
+}
+#wrap #list.move{
+  animation: moveUl 1s;
+}
+@keyframes moveUl {
+  form{}
+  to{transform: translateY(100%)}
+}
+#mask{
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition:1s opacity;
+  z-index: 50;
+  /*display: none;*/
+}
+#wrap #list > li{
+   position: absolute;
+    top: 0;
+    left: 0;
+ }
+#wrap #list > li.translations{
+  transition: 0.5s all;
+}
+#wrap #list > li:nth-of-type(1){
+  width: 100%;
+  height: 100%;
+  background: url(img/b.png) no-repeat;
+  background-size:100% 100% ;
+  display: list-item;
+}
+
+#wrap #list > li:nth-of-type(2){
+  width: 100%;
+  height: 100%;
+  background: url(img/c.png) no-repeat;
+  background-size:100% 100% ;
+  display: none;
+}
+#wrap #list > li:nth-of-type(3){
+  width: 100%;
+  height: 100%;
+  background: url(img/d.png) no-repeat;
+  background-size:100% 100% ;
+  display: none;
+}
+#wrap #list > li:nth-child(4){
+  width: 100%;
+  height: 100%;
+  background: url(img/e.png) no-repeat;
+  background-size:100% 100% ;
+  display: none;
+}
+#wrap #list > li:nth-child(5){
+  width: 100%;
+  height: 100%;
+  background: url(img/f.png) no-repeat;
+  background-size:100% 100% ;
+  display: none;
+}
+
+
+/*第一页*/
+#one ul{
+  position: absolute;
+  bottom: 4%;
+  left: 20%;
+}
+#one ul>li{
+  font-size: 36px;
+  /*position: absolute;*/
+  color: white;
+  line-height: 60px;
+  transition:1s ;
+}
+#one ul>li>p{
+  text-align: left;
+}
+
+/*第二页*/
+#two #twoChild li{    width: 90px;  height: 90px;  position: absolute;transition: 1s; }
+#two #twoChild li:nth-child(1){  background: url(img/c1.png);  }
+#two #twoChild li:nth-child(2){  background: url(img/c2.png);  }
+#two #twoChild li:nth-child(3){  background: url(img/c3.png);  }
+#two #twoChild li:nth-child(4){  background: url(img/c4.png);  }
+#two #twoChild li:nth-child(5){  background: url(img/c5.png);  }
+#two #twoChild li:nth-child(6){  background: url(img/c6.png);  }
+/*
+left: 43%;  top: 30%
+left: 13%;  top: 40%
+left: 73%;  top: 40%
+left: 13%;  top: 65%
+left: 73%;  top: 65%
+left: 43%;  top: 75%
+*/
+
+/*箭头*/
+#arrow{
+  background: url("img/arr.png") no-repeat;
+  width: 90px;
+  height: 52px;
+  position: fixed;
+  bottom: 6%;
+  left: 50%;
+  text-align: center;
+  z-index: 10;
+  animation: arrowMove 1s infinite ;
+
+}
+@keyframes arrowMove {
+    from{}
+    40%{transform: translateY(-50px);
+      opacity: 0.5;}
+    50%{transform: translateY(-60px);
+    opacity: 0;}
+    to{}
+}
+
+
+
+/*第三页*/
+
+ #three .threeChild{
+   position: absolute;
+   bottom: 10%;
+   left: 20%;
+   background: url("img/d1.png") no-repeat;
+   width: 460px;
+   height: 222px;
+   transform-style: preserve-3D;
+   perspective: 800px;
+   transition: 2s;
+ }
+
+ /*第四页*/
+#four .fourUl>li{
+  font-size: 22px;
+  color: white;
+  border: 1px #FFF solid;
+  box-shadow: 0 0 15px #FFF;
+  border-radius: 5px;
+  word-wrap: break-word;
+  position: absolute;
+  overflow: hidden;
+}
+
+#four .fourUl>li:nth-child(1){
+  position: absolute;
+  left: 4%;
+  top: 15%;
+  width: 220px;
+  height: 240px;
+}
+#four .fourUl>li:nth-child(2){
+  position: absolute;
+  left: 50%;
+  top: 19%;
+  width: 280px;
+  height: 150px;
+}
+#four .fourUl>li:nth-child(3){
+  position: absolute;
+  left: 78%;
+  top: 40%;
+  width: 110px;
+  height: 280px;
+}
+
+/*音乐*/
+#music{
+  width: 47px;
+  height: 47px;
+  background: url(img/music.png) no-repeat;
+  background-size: cover;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 7;
+}
