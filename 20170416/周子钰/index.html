@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>Title</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+
+    html,body{
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .page{
+      touch-action: none;
+    }
+    .hide{
+      display: none;
+    }
+    .current{
+      z-index: 2;
+    }
+    #wrap{
+      height: 100%;
+    }
+    #wrap #list{
+      height: 100%;
+    }
+
+    #list>li {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-size: cover;
+      z-index: 5;
+      /*display: none;*/
+    }
+    /*mask start*/
+    #mask{
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: 1s opacity;
+    }
+    /*mask end*/
+
+
+    /*one start*/
+    #list>li:nth-child(1){
+      height: 100%;
+      background: url(img/b.png) no-repeat;
+      background-size:100% 100%;
+      /*display: none;*/
+    }
+
+    #list .one{
+      font-size: 30px;
+      color: white;
+      position: absolute;
+      left: 20%;
+      top: 65%;
+
+    }
+
+    #list .move-from-right{
+      animation: 1.5s  moveFromRight both;
+      -webkit-animation: 1.5s  moveFromRight both;
+    }
+    #list .move-from-left{
+      animation: 1.5s  moveFromLeft both;
+      -webkit-animation: 1.5s  moveFromLeft both;
+    }
+
+    @keyframes moveFromRight {
+      from{transform: translateX(100%);opacity: 0}
+      to{transform: translateX(0%);opacity: 1}
+    }
+
+    @keyframes moveFromLeft {
+      from{transform: translateX(-51%);opacity: 0}
+      to{transform: translateX(0%);opacity: 1}
+    }
+
+    /*one end*/
+
+    /*two start*/
+    #list>li:nth-of-type(2) {
+      background: url(img/c.png) no-repeat;
+      -webkit-background-size:100% 100%;
+      background-size:100% 100%;
+      /*display: none;*/
+    }
+
+    #list .two li{
+      width: 90px;
+      height: 90px;
+      position: absolute;
+
+    }
+    #list .two li:nth-of-type(1){background:url(./img/c1.png);left:43%;top:30%;animation: 1s linear move2-1 both;}
+    #list .two li:nth-of-type(2){background:url(./img/c2.png);left:13%;top:40%;animation: 1s linear move2-2 both;}
+    #list .two li:nth-of-type(3){background:url(./img/c3.png);left:73%;top:40%;animation: 1s linear move2-3 both;}
+    #list .two li:nth-of-type(4){background:url(./img/c4.png);left:13%;top:65%;animation: 1s linear move2-4 both;}
+    #list .two li:nth-of-type(5){background:url(./img/c5.png);left:73%;top:65%;animation: 1s linear move2-5 both;}
+    #list .two li:nth-of-type(6){background:url(./img/c6.png);left:43%;top:75%;animation: 1s linear move2-6 both;}
+
+    @keyframes move2-1 {
+      0%{transform: rotate(0deg);top:50%}
+      100%{transform: rotate(720deg);top:30%;}
+    }
+    @keyframes move2-2{
+      0%{transform: rotate(0deg);top:50%;left: 43%;}
+      100%{transform: rotate(720deg);top:40%;left: 13%}
+    }
+    @keyframes move2-3{
+      0%{transform: rotate(0deg);top:50%;left: 43%;}
+      100%{transform: rotate(720deg);top:40%;left: 73%;}
+    }
+    @keyframes move2-4{
+      0%{transform: rotate(0deg);top:50%;left: 43%;}
+      100%{transform: rotate(720deg);top:65%;left: 13%;}
+    }
+    @keyframes move2-5{
+      0%{transform: rotate(0deg);top:50%;left: 43%;}
+      100%{transform: rotate(720deg);top:65%;left:73%;}
+    }
+    @keyframes move2-6{
+      0%{transform: rotate(0deg);top:50%;left: 43%;}
+      100%{transform: rotate(720deg);top:75%;}
+    }
+
+
+    /*two end*/
+
+    /*three start*/
+    #list>li:nth-of-type(3) {
+      background-image: url(./img/d.png);
+      -webkit-background-size:100% 100%;
+      background-size:100% 100%;
+      /*display: none;*/
+    }
+
+    #list .three{
+      width: 460px;
+      height: 222px;
+      background: url(./img/d1.png) no-repeat;
+      position: absolute;
+      left: 50%;
+      margin-left: -230px;
+      top: 60%;
+      /*animation: 1.5s linear rotate;*/
+      animation: 1s linear rotate3 both;
+    }
+    @keyframes rotate3 {
+      0%{}
+      100%{transform: rotateY(720deg)}
+    }
+
+
+    /*three end*/
+
+    /*four start*/
+    #list>li:nth-of-type(4) {
+      background-image: url(./img/e.png);
+      -webkit-background-size:100% 100%;
+      background-size:100% 100%;
+      /*display: none;*/
+
+    }
+
+    #list .four li {
+      font-size: 22px;
+      color: white;
+      border: 1px #FFF solid;
+      box-shadow: 0 0 15px #FFF;
+      border-radius: 5px;
+      word-wrap: break-word;
+      position: absolute;
+      overflow: hidden;
+    }
+
+    #list .four li:nth-of-type(1) {
+      width: 220px;
+      height: 240px;
+      left: 4%;
+      top: 15%;
+      animation: 1s  show4-1 linear both;
+      -webkit-animation: 1s show4-1 linear both;
+    }
+    #list .four li:nth-of-type(2){
+      width: 280px;
+      height: 150px;
+      left: 50%;
+      top: 19%;
+      animation: 1s  show4-2 linear both;
+      -webkit-animation: 1s show4-2 linear both;
+    }
+    #list .four li:nth-of-type(3) {
+      width: 110px;
+      height: 280px;
+      left: 78%;
+      top: 40%;
+      animation: 1s  show4-3 linear both;
+      -webkit-animation: 1s show4-3 linear both;
+    }
+
+
+    @keyframes show4-1 {
+      0%{width: 0;height: 0;}
+      100%{width: 220px;height: 240px;}
+    }
+    @keyframes show4-2 {
+      0%{width: 0;height: 0;}
+      100%{width: 280px;height: 150px;}
+    }
+    @keyframes show4-3 {
+      0%{width: 0;height: 0;}
+      100%{width: 110px;height: 280px;}
+    }
+
+
+
+    /*four end*/
+
+    /*five start*/
+    #list>li:nth-of-type(5) {
+      background-image: url(./img/f.png);
+      -webkit-background-size:100% 100%;
+      background-size:100% 100%;
+      /*display: none;*/
+    }
+
+
+
+    /*five end*/
+
+
+    /*箭头*/
+    #arrow {
+      width: 90px;
+      height: 52px;
+      background: url(./img/arr.png) no-repeat;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      margin-left: -45px;
+      z-index: 7;
+      animation: 1s infinite arrowTop both;
+      -webkit-animation: 1s infinite arrowTop both;
+    }
+    @keyframes arrowTop {
+      0%{transform: translateY(100%);opacity: 0}
+      50%{transform: translateY(0%);opacity: 1}
+      100%{transform: translateY(-100%);opacity: 0}
+    }
+
+    /*music*/
+    #music {
+      width: 47px;
+      height: 47px;
+      background: url(./img/music.png) no-repeat;
+      background-size: cover;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 7;
+      /*animation: 1.5s infinite musicRotate linear both;*/
+
+    }
+    .active{
+      animation: 1.5s infinite musicRotate linear both;
+    }
+    @keyframes musicRotate {
+      from{transform: rotate(0deg)}
+      to{transform: rotate(360deg)}
+    }
+
+    /*出入场*/
+
+
+    .page-to-top{
+      animation: 1s linear page-to-top both;
+      animation-delay: -0.2s
+
+    }
+    .page-from-bottom{
+      animation: 1s linear page-from-bottom both;
+    }
+    .page-to-bottom{
+      animation: 1s linear page-to-bottom both;
+    }
+    .page-from-top{
+      animation: 1s linear page-from-top both;
+    }
+
+    /*向上滑*/
+    @keyframes page-to-top {
+      0%{transform: scaleY(1);display: block}
+      50%{transform: scaleY(0.1);display: block}
+      100%{transform: scaleY(0);display: none}
+    }
+    @keyframes page-from-bottom {
+      0%{transform: scaleY(0);}
+      50%{transform: scaleY(0.1)}
+      100%{transform: scaleY(1);}
+    }
+    /*向下滑*/
+    @keyframes page-to-bottom {
+      0%{transform: scaleY(0);}
+      50%{transform: scaleY(0.1)}
+      100%{transform: scaleY(1);}
+    }
+    @keyframes page-from-top{
+      0%{transform: scaleY(1);display: block}
+      50%{transform: scaleY(0.1);display: block}
+      100%{transform: scaleY(0);display: none}
+    }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="mask"></canvas>
+  <ul id="list">
+    <li class="page page-1 current">
+      <ul class="one">
+      <li class="move-from-right">
+        <p>曾经做为前端开发的你</p>
+        <p>解决PC兼容性而焦头烂额</p>
+      </li>
+      <li class="move-from-left">
+        <p>而今</p>
+        <p>移动端H5应用疯狂来袭</p>
+      </li>
+      <li class="move-from-right">
+        <p>你是否已准备充分</p>
+        <p>学习新技能</p>
+      </li>
+      <li class="move-from-left">
+        <p>曾破茧成蝶、重获新生？</p>
+      </li>
+    </ul>
+    </li>
+    <li class="page page-2 hide">
+      <ul class="two">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </li>
+    <li class="page page-3 hide">
+      <div class="three">
+
+      </div>
+    </li>
+    <li class="page page-4 hide">
+      <ul class="four">
+        <li>transform  transition  rotate  scale  translate  keyframes animation  webkitTransitionEnd webkitAnimationIteration elapsedTime perspective…</li>
+        <li>drawImage lineWidth  strokeStyle  lineCap  globalCompositeOperation  moveTo   lineTo  stroke  arc  getImageData…</li>
+        <li>audio autoplay loop  paused  play  pause…</li>
+      </ul>
+    </li>
+    <li class="page page-5 hide"></li>
+    
+    <div id="arrow"></div>
+    <div id="music" class="active">
+      <audio id="a1" src="./img/music.mp3" preload="auto" loop></audio>
+    </div>
+  </ul>
+
+</div>
+</body>
+<script type='text/javascript' src='./js/zepto.js'></script>
+<script type='text/javascript' src='./js/touch.js'></script>
+<script type="text/javascript" src="./js/index.js"></script>
+<script>
+  document.addEventListener("touchstart", function (ev) {
+    var ev = ev || event;
+    ev.preventDefault();
+  });
+
+  (function(){
+
+    var targetW = 640;
+    var width = document.documentElement.clientWidth;
+    var scale = width/targetW;
+
+    var metaNode =document.querySelector("meta[name='viewport']");
+    metaNode.setAttribute("content","initial-scale="+scale+",user-scalable=no");
+  })();
+
+  window.onload = function () {
+    var wrap = document.querySelector("#wrap");
+    var oc = document.querySelector("#mask");
+    var list = $("#list");
+    var $music = $('#music');
+    var isRotate = true;
+
+    oc.width = document.documentElement.clientWidth;
+    oc.height = document.documentElement.clientHeight;
+    $('#a1').get(0).play();
+
+
+
+    if(oc.getContext){
+      var ctx = oc.getContext("2d");
+
+      var img = new Image();
+      img.src = "img/a.png";
+      img.onload = function () {
+//          draw(this);
+      }
+    }
+
+    $music.click(function () {
+
+      if(isRotate){
+        $music.removeClass('active');
+        $('#a1').get(0).pause()
+        isRotate = false;
+      }else {
+        $music.addClass('active');
+        $('#a1').get(0).play();
+        isRotate = true;
+      }
+    })
+
+    list.onmousedown=function(){
+      if(node.setCapture){
+        node.setCapture();
+      }
+
+      document.onmousemove=function(){
+        //开始滑屏逻辑
+
+
+
+
+      };
+      document.onmouseup=function(){
+        document.onmouseup = document.onmousemove =null;
+        if(document.releaseCapture){
+          document.releaseCapture();
+        }
+      };
+
+
+      return false;
+    };
+
+
+
+
+
+  }
+</script>
+
+</html>

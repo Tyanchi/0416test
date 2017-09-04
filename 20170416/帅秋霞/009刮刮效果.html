@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			ul{
+				list-style: none;
+			}
+			#wrap{
+				height: 100%;
+			}
+			#wrap #list{
+				height: 100%;
+			}
+			#wrap #list > li{
+				width:100% ;
+				position: absolute;
+				left: 0;
+				top:0;
+				z-index: -1;
+				transition: all 1s;
+			}
+			#wrap #list > li:nth-child(1){
+				height: 100%;
+				background: url(img/b.png) no-repeat;
+				background-size:100% 100% ;
+			}
+			#wrap #list > li:nth-child(2){
+				height: 100%;
+				background: url(img/c.png) no-repeat;
+				background-size:100% 100% ;
+			}
+			#wrap #list > li:nth-child(3){
+				height: 100%;
+				background: url(img/d.png) no-repeat;
+				background-size:100% 100% ;
+			}
+			#wrap #list > li:nth-child(4){
+				height: 100%;
+				background: url(img/e.png) no-repeat;
+				background-size:100% 100% ;
+			}
+			#wrap #list > li:nth-child(5){
+				height: 100%;
+				background: url(img/f.png) no-repeat;
+				background-size:100% 100% ;
+			}
+			.zIndex{
+				z-index: 10 !important;
+			}
+			#mask{
+				z-index: 99;
+				position: absolute;
+				left: 0;
+				top: 0;
+				transition:1s opacity;
+			}
+			
+			
+			#list div{
+				font-size: 30px;
+				color: white;
+				position: absolute;
+				left: 20%;
+				top: 65%
+			}
+			
+			#list .li2child li {
+				width: 90px;
+				height: 90px;
+				position: absolute
+			}
+			
+			#list .li2child li:nth-of-type(1) {
+				background: url(img/c1.png);
+				left: 43%;
+				top: 30%
+			}
+			
+			#list .li2child li:nth-of-type(2) {
+				background: url(img/c2.png);
+				left: 13%;
+				top: 40%
+			}
+			
+			#list .li2child li:nth-of-type(3) {
+				background: url(img/c3.png);
+				left: 73%;
+				top: 40%
+			}
+			
+			#list .li2child li:nth-of-type(4) {
+				background: url(img/c4.png);
+				left: 13%;
+				top: 65%
+			}
+			
+			#list .li2child li:nth-of-type(5) {
+				background: url(img/c5.png);
+				left: 73%;
+				top: 65%
+			}
+			
+			#list .li2child li:nth-of-type(6) {
+				background: url(img/c6.png);
+				left: 43%;
+				top: 75%
+			}
+			
+			#list .li2child li.active {
+				left: 43%;
+				top: 52%
+			}
+			
+			#list .li3child {
+				width: 460px;
+				height: 222px;
+				background: url(img/d1.png) no-repeat;
+				position: absolute;
+				left: 50%;
+				margin-left: -230px;
+				top: 60%
+			}
+			
+			#list .li4child li {
+				font-size: 22px;
+				color: white;
+				border: 1px #FFF solid;
+				box-shadow: 0 0 15px #FFF;
+				border-radius: 5px;
+				word-wrap: break-word;
+				position: absolute;
+				overflow: hidden
+			}
+			
+			#list .li4child li:nth-of-type(1) {
+				width: 220px;
+				height: 240px;
+				left: 4%;
+				top: 15%
+			}
+			
+			#list .li4child li:nth-of-type(2) {
+				width: 280px;
+				height: 150px;
+				left: 50%;
+				top: 19%
+			}
+			
+			#list .li4child li:nth-of-type(3) {
+				width: 110px;
+				height: 280px;
+				left: 78%;
+				top: 40%
+			}
+			
+			#list .li4child li.active {
+				width: 0;
+				height: 0
+			}
+			
+			#arrow {
+				width: 90px;
+				height: 52px;
+				background: url(img/arr.png) no-repeat;
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				margin-left: -45px;
+				z-index: 7;
+				animation: 1s infinite arrowTop;
+				-webkit-animation: 1s infinite arrowTop
+			}
+			
+			
+			
+		
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<canvas id="mask"></canvas>
+			<ul id="list">
+				<li class="zIndex">
+					<div id="con_p">
+						<p>曾经做为前端开发的你<br/>
+						解决PC兼容性而焦头烂额</p>
+						
+						
+						
+						<p>而今<br />移动端H5应用疯狂来袭</p>
+						
+						<p>你是否已准备充分<br/>
+						学习新技能</p>
+						
+						<p>曾破茧成蝶、重获新生？</p>
+					</div>
+				
+				</li>
+				<li>
+					<ul class="li2child">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</li>
+				<li><div class="li3child"></div></li>
+				<li>
+					<ul class="li4child">
+						<li>transform transition rotate scale translate keyframes animation webkitTransitionEnd webkitAnimationIteration elapsedTime perspective…</li>
+						<li>drawImage lineWidth strokeStyle lineCap globalCompositeOperation moveTo lineTo stroke arc getImageData…</li>
+						<li>audio autoplay loop paused play pause…</li>
+					</ul>
+				</li>
+				<li></li>
+				
+				<div id="arrow"></div>
+				<div id="music">
+					<audio id="a1" src="img/music.mp3" preload="auto" loop></audio>
+				</div>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/tools.js"></script>
+	
+	<script type="text/javascript">
+	console.log(window.css)
+		document.addEventListener("touchstart",function(ev){
+			var ev =ev||event;
+			ev.preventDefault();
+		});
+		
+		
+		//viewport适配
+		(function(){
+			var targetW = 640; 
+			var width = document.documentElement.clientWidth;
+			var scale = width/targetW;
+			
+			var metaNode =document.querySelector("meta[name='viewport']");
+			metaNode.setAttribute("content","initial-scale="+scale+",user-scalable=no");
+		})();
+		
+		
+		window.onload=function(){
+			var oc = document.querySelector("#mask");
+			oc.width = document.documentElement.clientWidth;
+			oc.height = document.documentElement.clientHeight;
+			if(oc.getContext){
+				var ctx = oc.getContext("2d");
+				
+				var img =new Image();
+				img.src="img/a.png";
+				img.onload=function(){
+					draw(this);
+				}
+			}
+			
+			function draw(img){
+				ctx.drawImage(img,0,0,oc.width,oc.height);
+				
+				oc.addEventListener('touchstart',function(ev){
+					var ev =ev||event;
+					var touchC = ev.changedTouches[0];
+					
+					var x = touchC.clientX - this.offsetLeft;
+					var y = touchC.clientY - this.offsetTop;
+					
+					ctx.globalCompositeOperation="destination-out";
+					ctx.lineWidth=350;
+					ctx.lineCap="round";
+					
+					ctx.beginPath();
+					ctx.moveTo(x,y);
+					ctx.lineTo(x+1,y+1);
+					ctx.stroke();
+					
+					
+				});
+				oc.addEventListener('touchmove',function(){
+					var ev =ev||event;
+					var touchC = ev.changedTouches[0];
+					
+					var x = touchC.clientX - this.offsetLeft;
+					var y = touchC.clientY - this.offsetTop;
+					
+					ctx.lineTo(x,y);
+					ctx.stroke();
+				});
+				oc.addEventListener("touchend",function(){
+					
+					var imgData = ctx.getImageData(0,0,oc.width,oc.height);
+					var flag =0;
+					var allPx = imgData.width * imgData.height;
+					for(var i=0;i<allPx;i++){
+						if(imgData.data[4*i+3] == 0){
+							flag++;
+						}
+					}
+					
+					
+					if(flag > allPx/2){
+						oc.style.opacity=0;
+					}
+					
+				})
+			
+				oc.addEventListener("transitionend",function(){
+					this.remove();
+				})
+			}
+			
+			
+			move();
+			function move(){
+				var ul = document.querySelector("#list");
+				var lis = document.querySelectorAll("#list>li");
+				
+				var oldIndex = 0;
+				var nowIndex = 0;
+				var h = document.documentElement.clientHeight;
+				var startY =0;
+				flag = 0;
+				var nowY = 0;
+				ul.addEventListener("touchstart",function(ev){
+					ev = ev || event;
+					console.log(ev.changedTouches[0].clientY)
+				//	startX = e.changedTouches[0].;
+					startY = ev.changedTouches[0].clientY;
+					
+					//lis[oldIndex].css("translateY",0);
+					
+					//console.log(lis[oldIndex])
+					lis[oldIndex].className = "zIndex"
+				})
+				
+				ul.addEventListener("touchmove",function(ev){
+					ev = ev || event;
+					nowY = ev.changedTouches[0].clientY;
+					if(nowY - startY > 30){
+						//console.log("向下滑")
+						for(var i = 0 ;i <lis.length ; i++){
+							//	lis[i].css("translateY",h)
+							css(lis[i],"translateY",-h)
+							lis[i].style.visibility="hidden"
+						}
+						css(lis[oldIndex],"translateY",0)
+					//	lis[oldIndex].style.visibility="visible"
+						//console.log(oldIndex)
+						
+						flag = 1
+					}else if(nowY - startY < -30){
+						//console.log("向上滑")
+						flag = -1
+						for(var i = 0 ;i <lis.length ; i++){
+							//	lis[i].css("translateY",h)
+							css(lis[i],"translateY",h)
+							lis[i].style.visibility="hidden"
+						}
+						css(lis[oldIndex],"translateY",0)
+					//	lis[oldIndex].style.visibility="visible";
+					
+					}
+					
+					
+				})
+				
+				ul.addEventListener("touchend",function(ev){
+					
+					isFirst = true;
+					if(isFirst){
+						isFirst = false;
+						if(flag ==1){
+						lis[oldIndex].className = "";
+						//lis[oldIndex].css("tanslsteY",-200)
+						css(lis[oldIndex],"translateY",200)
+						css(lis[oldIndex],"scale",0.8)
+						
+						console.log(nowIndex)
+						if(nowIndex <= 0){
+							nowIndex = lis.length 
+						}
+						nowIndex--;
+						lis[nowIndex].className = "zIndex";
+						lis[nowIndex].style.visibility = "visible"
+						//lis[nowIndex].css("tanslsteY",0)
+						css(lis[nowIndex],"translateY",0)
+						css(lis[nowIndex],"scale",1)
+						//console.log(nowIndex)
+						//lis[nowIndex].className = "zIndex";
+						
+						
+						oldIndex = nowIndex;
+					}else if(flag == -1){
+						
+						lis[oldIndex].className = "";
+						//lis[oldIndex].css("tanslsteY",-200)
+						css(lis[oldIndex],"translateY",-200)
+						css(lis[oldIndex],"scale",0.8)
+						if(nowIndex >= lis.length - 1){
+							nowIndex = -1
+						}
+						nowIndex++;
+						lis[nowIndex].className = "zIndex";
+						lis[nowIndex].style.visibility = "visible"
+						//lis[nowIndex].css("tanslsteY",0)
+						css(lis[nowIndex],"translateY",0)
+						css(lis[nowIndex],"scale",1)
+						console.log(nowIndex)
+						//lis[nowIndex].className = "zIndex";
+						
+						
+						oldIndex = nowIndex;
+					
+					}
+					}
+					
+			
+			
+			
+			
+			
+				})
+			}
+            var changeLi = [{
+                inAn: function() {
+
+                    var pNode = document.querySelectorAll("#con_p p")
+                    console.log(pNode)
+                    for(var i = 0; i<pNode.length;i++){
+                        console.log(i)
+                        css(pNode[i],"translateX",0);
+                        pNode[i].style.opacity = 1;
+                    }
+                },
+                outAn: function() {
+                    var pNode = document.querySelectorAll("#con_p p")
+
+                    for(var i = 0; i<pNode.length;i++){
+                        if(i%2){
+                            css(pNode[i],"translateX",-200);
+                        }else {
+                            css(pNode[i],"translateX",200);
+                        }
+
+                        pNode[i].style.opacity = 0;
+                    }
+                }
+
+            },{
+                inAn: function() {
+                    var liNodes = document.querySelectorAll("#list .li2child li");
+                    for(var i = 0; i<liNodes.length;i++){
+                        liNodes[i].className="";
+                        css(liNodes[i],"rotate",720)
+                        liNodes[i].style.opacity = 1
+                    }
+
+                },
+                outAn: function() {
+                    var liNodes = document.querySelectorAll("#list .li2child li");
+                    for(var i = 0; i<liNodes.length;i++){
+                        liNodes[i].className="active";
+                        css(liNodes[i],"rotate",0)
+                        liNodes[i].style.opacity = 0
+                    }
+
+                }
+
+            },{
+                inAn: function() {
+                    var yidongNode = document.querySelector(".yidong")
+                    //	css(yidongNode,"rotateY",720)
+                    yidongNode.style.transform = "rotateY(720deg)"
+                    console.log(11)
+                },
+                outAn: function() {
+                    var yidongNode = document.querySelector(".yidong")
+                    yidongNode.style.transform = "rotateY(0deg)"
+                    //css(yidongNode,"rotateY",0)
+                }
+            },
+                {
+                    inAn: function() {
+                        var lis = document.querySelectorAll("#list .li4child li")
+
+                        lis[0].style.width = "220px";
+                        lis[0].style.height = "240px";
+                        lis[1].style.width = "280px";
+                        lis[1].style.height = "150px";
+                        lis[2].style.width = "110px";
+                        lis[2].style.height = "280px";
+                        lis[0].style.opacity = 1;
+                        lis[1].style.opacity = 1;
+                        lis[2].style.opacity = 1;
+                        lis[0].style.transition ="all 0.5s";
+                        lis[1].style.transition ="all 0.5s";
+                        lis[2].style.transition ="all 0.5s";
+                    },
+                    outAn: function() {
+                        var lis = document.querySelectorAll("#list .li4child li")
+                        //var spans = document.querySelectorAll(".lispan")
+                        for(var i = 0;i<lis.length ; i++){
+                            lis[i].style.width = "0px";
+                            lis[i].style.height = "0px";
+                            lis[i].style.opacity = 0
+                            lis[i].style.transition ="none";
+                        }
+
+                    }
+                }
+
+
+
+
+
+            ]
+			
+			
+		}
+	</script>
+	
+</html>

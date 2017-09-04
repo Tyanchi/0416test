@@ -1,0 +1,188 @@
+
+/*动画逻辑*/
+
+/*主体动画*/
+
+/*定义向上滑动*/
+.page-moveToTop{
+    animation:moveToTop 0.8s ease both ;
+}
+
+.page-moveFromBottom{
+    animation:moveFromBottom 0.8s ease both ;
+}
+
+/*向下滑动*/
+.page-moveToBottom{
+    animation:moveToBottom 0.8s ease both ;
+}
+
+.page-moveFromTop{
+    animation:moveFromTop 0.8s ease both ;
+}
+
+
+
+/*动画执行逻辑*/
+/*向上*/
+@keyframes moveToTop {
+    from{}
+    to{transform: translateY(-100%)}
+}
+
+@keyframes moveFromBottom {
+    from{transform: translateY(100%)}
+    to{}
+}
+
+/*向下*/
+@keyframes moveToBottom {
+    from{}
+    to{transform: translateY(100%)}
+}
+@keyframes moveFromTop {
+    from{transform: translateY(-100%)}
+    to{}
+}
+
+
+/*定义箭头的动画*/
+.page-moveTcon{
+    animation: moveIcon 1s ease both infinite;
+}
+
+@keyframes moveIcon {
+    0%{transform: translateY(50%);opacity:0}
+    50%{transform: translateY(0);opacity:1}
+    100%{transform: translateY(-50%);opacity:0}
+}
+
+/*第一屏动画*/
+.page-fromLeft{
+    animation: fromLeft 1s ease both;
+}
+@keyframes fromLeft {
+    from{transform:translateX(-100px);opacity: 0}
+    to{opacity: 1}
+}
+
+.page-fromRight{
+    animation: fromRight 1s ease both;
+}
+@keyframes fromRight {
+    from{transform:translateX(100px);opacity: 0}
+    to{opacity: 1}
+}
+
+
+/*第二屏动画*/
+
+.page-oneImg{
+    animation:oneImg 1s ease both;
+}
+@keyframes oneImg {
+    form{}
+    to{transform: translateY(-100px) rotateZ(-720deg)}
+}
+
+.page-twoImg{
+    animation:twoImg 1s ease both;
+}
+@keyframes twoImg {
+    form{}
+    to{transform: translateX(-50px) translateY(-30px) rotateZ(720deg)}
+}
+
+.page-threeImg{
+    animation:threeImg 1s ease both;
+}
+@keyframes threeImg {
+    form{}
+    to{transform: translateX(50px) translateY(-30px) rotateZ(-720deg)}
+}
+
+.page-fourImg{
+    animation:fourImg 1s ease both;
+}
+@keyframes fourImg {
+    form{}
+    to{transform: translateX(-50px) translateY(30px) rotateZ(-720deg)}
+}
+
+.page-fiveImg{
+    animation:fiveImg 1s ease both;
+}
+@keyframes fiveImg {
+    form{}
+    to{transform: translateX(50px) translateY(30px) rotateZ(-720deg)}
+}
+
+.page-sixImg{
+    animation:sixImg 1s ease both;
+}
+@keyframes sixImg {
+    form{}
+    to{transform: translateY(100px) rotateZ(720deg)}
+}
+
+/*第三屏动画*/
+.page-moveText{
+    animation:moveText 1s ease both;
+}
+@keyframes moveText {
+    form{}
+    to{transform: rotateY(720deg)}
+}
+
+
+/*第四屏动画*/
+.page-moveOne{
+    animation:moveOne 1s ease both;
+}
+@keyframes moveOne {
+    0%{width: 0;height:0}
+    100%{width: 80px;height:70px}
+}
+
+.page-moveTwo{
+    animation:moveTwo 1s ease both;
+}
+@keyframes moveTwo {
+    0%{width: 0;height:0}
+    100%{width: 100px;height:50px}
+}
+
+.page-moveThree{
+    animation:moveThree 1s ease both;
+}
+@keyframes moveThree {
+    0%{width: 0;height:0}
+    100%{width: 40px;height:100px}
+}
+
+
+/*音频*/
+.page-moveMusic{
+    animation:moveMusic 3s both infinite;
+}
+@keyframes moveMusic {
+    from{transform: rotateZ(0)}
+    to{transform: rotateZ(-360deg)}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

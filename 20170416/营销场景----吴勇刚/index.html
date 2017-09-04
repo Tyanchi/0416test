@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html,body{width: 100%;height: 100%;overflow: hidden;}
+			#wrapper{width: 100%;height: 100%;position: relative;background: white;}
+			#wrapper>section{width: 100%;height: 100%;position: absolute;}
+			
+			#wrapper>section:nth-of-type(2){background: url(img/c.png);background-size: 100% 100%;}
+			#wrapper>section:nth-of-type(3){background: url(img/d.png);background-size: 100% 100%;}
+			#wrapper>section:nth-of-type(4){background: url(img/e.png);background-size: 100% 100%;}
+			#wrapper>section:nth-of-type(5){background: url(img/f.png);background-size: 100% 100%;}
+			#wrapper>section:nth-of-type(6){background: url(img/b.png);background-size: 100% 100%;}
+			#wrapper #footer{z-index=99;width: 100%;height: 30px;position: absolute;bottom: 50px;text-align: center;animation: .8s showOrHide infinite;}
+			#wrapper #footer img{height:30px;width: 50px;}
+			.active{z-index: 9;}
+			.oldActive{z-index: 8;}
+			@keyframes showOrHide{
+				from{
+					transform: translateY(-100%);
+					opacity: 0;
+				}
+				to{
+					transform: translateY(0);
+					opacity: 0;
+				}
+			}
+			@keyframes out{
+				from{
+					transform: scale(1);
+				}
+				to{
+					transform: scale(0.8);
+				}
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<audio src="img/music.mp3" width=30 height=30></audio>
+			<!--遮罩层一旦刮干净后，就设置透明度为0，并且将其从结构上删除-->
+			<section id="mask" >
+				<div>0</div>
+			</section>
+			
+			<section id="yingyong">
+				<div>2</div>
+			</section>
+			<section id="changjing">
+				<div>3</div>
+			</section>
+			<section id="point">
+				<div>4</div>
+			</section>
+			<section id="wu">
+				<div>5</div>
+			</section>
+			<section id="po" class="active">
+				<div>1</div>
+			</section>
+			<footer id="footer">
+				<img src="img/arr.png"/>
+			</footer>
+		</div>
+	</body>
+	<script src="js/transform.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		/*禁止浏览器默认行为*/
+		window.onload = function(){
+			document.addEventListener("touchstart",function(ev){     //禁止浏览器所有默认行为的套路，绑定在document身上
+		     ev=ev||event;
+		     ev.preventDefault();
+			});
+	
+			var pages = document.querySelectorAll("#wrapper>section");
+			var pointX = document.documentElement.clientWidth/2;
+			var pointY = document.documentElement.clientHeight;
+			var oldPage= 1;
+			var newPage = 0;
+			var startY =0;
+			
+			var dis = 0;
+			var isDown= true;
+			var firstMove =true;
+			
+			for(var i=1;i<pages.length;i++){
+				var scale = 1;
+				var firstIsDown = true;
+				
+				
+				
+				(function(i){
+					pages[i].addEventListener("touchstart",function(ev){
+						ev=ev||event;
+						
+						var touchC = ev.changedTouches[0];
+						isDown= true;
+						firstMove =true;
+						dis = 0;
+						scale=1
+						startY = touchC.clientY;
+//						pages[oldPage].className = "";
+					})
+					pages[i].addEventListener("touchmove",function(ev){
+						
+						ev=ev||event;
+						var touchC = ev.changedTouches[0];
+						var nowY = touchC.clientY;												
+						dis = nowY - startY;	
+						isDown = (dis>0)?true:false;
+						drag(isDown,i)
+						startY = nowY
+					})
+					pages[i].addEventListener("touchend",function(){
+						
+						dragEnd()
+					});
+					function drag(isDown,oldPage){
+							//向下滑动			
+						if(isDown){
+							if(firstMove){
+								newPage = oldPage-1;
+								if(newPage===0){
+									newPage =pages.length-1;
+								};
+								for (var j = 0; j < pages.length; j++) {
+									pages[j].className = "";
+									pages[j].style.opacity = 0;
+									pages[j].style.transition = "0s"
+									
+								}
+								pages[newPage].style.opacity = 1;
+								pages[oldPage].style.opacity = 1;
+								pages[oldPage].className = "oldActive";
+								pages[newPage].className = "active";
+
+//								pages[newPage].style.top = "-100%";
+								pages[newPage].style.transform = "translateY(-100%)";
+								firstIsDown = true;
+								firstMove = false;
+							}
+							if(firstIsDown){								
+								scale -= 0.004;
+							}else{
+								scale += 0.005
+							};
+							console.log("down",scale)
+							
+						}else {
+							if(firstMove){
+								newPage = oldPage +1;
+								if(newPage===pages.length){
+									newPage = 1
+								};								
+								firstMove = false;
+								for (var j = 0; j < pages.length; j++) {
+									pages[j].className = "";
+									pages[j].style.opacity = 0;
+									pages[j].style.transition = "0s"
+								}
+								pages[newPage].style.opacity = 1;
+								pages[oldPage].style.opacity = 1;
+								pages[oldPage].className = "oldActive";
+								pages[newPage].className = "active";
+								pages[newPage].style.transform = "translateY(100%)";
+								firstIsDown = false;
+							}
+							if(!firstIsDown){								
+								scale -= 0.004;
+							}else{
+								scale += 0.005;	
+								
+							}
+							console.log("up",scale)
+						}
+						pages[oldPage].style.transform = "scale("+(scale)+")";
+						pages[oldPage].style.top = pages[oldPage].offsetTop + (dis/2) + "px";
+						pages[newPage].style.top = pages[newPage].offsetTop + dis + "px";//下：dis>0;top递增
+						
+					}
+					function dragEnd(){	
+						pages[newPage].style.transition = "1s";
+						pages[oldPage].style.transition = "1s"
+						pages[newPage].style.transform = "translateY(0)";
+						pages[newPage].style.top = 0;
+						pages[oldPage].style.transform = "scale(0.7)"
+						pages[oldPage].style.top = pages[oldPage].offsetTop + (dis/2) + "px";
+						setTimeout(function(){
+							pages[oldPage].style.transform = "scale(1)";
+							pages[oldPage].style.top = 0
+						},20)
+						pages[oldPage].style.top = 0;
+						oldPage = newPage;
+					}
+		
+					
+				})(i)				
+			}
+			
+		}
+			
+	
+	</script>
+</html>

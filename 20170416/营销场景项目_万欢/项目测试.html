@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			#wrap{
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			#wrap #list{
+				height: 100%;
+			}
+			#wrap #list > li:nth-child(1){height: 100%;background: url(img/b.png) no-repeat;
+								background-size:100% 100% ;
+								}
+			#wrap #list > li:nth-child(2){height: 100%;background: url(img/c.png) no-repeat;
+								background-size:100% 100% ;
+								}					
+			#wrap #list > li:nth-child(3){height: 100%;background: url(img/d.png) no-repeat;
+								background-size:100% 100% ;
+								}					
+			#wrap #list > li:nth-child(4){height: 100%;background: url(img/e.png) no-repeat;
+								background-size:100% 100% ;
+								}					
+			#wrap #list > li:nth-child(5){height: 100%;background: url(img/f.png) no-repeat;
+								background-size:100% 100% ;
+								}
+								
+			#mask{
+				position: absolute;
+				left: 0;
+				top: 0;
+				transition:1s opacity;
+			}
+		</style>
+		
+	</head>
+	<body>
+		
+		<div id="wrap">
+			<canvas id="mask"></canvas>
+				<ul id="list">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+		</div>
+	</body>
+	<script src="js/transform.js"></script>
+	<script type="text/javascript">
+		document.addEventListener("touchstart",function(ev){
+			ev=ev||event;
+			ev.preventDefault();
+		});
+		
+		
+		(function(){
+		var targetW = 640; 
+		var width = document.documentElement.clientWidth;
+		var scale = width/targetW;
+		var metaNode =document.querySelector("meta[name='viewport']");
+		metaNode.setAttribute("content","initial-scale="+scale+",user-scalable=no");
+	})();
+		
+		window.onload=function(){
+			
+			var oc = document.querySelector("#mask");
+			oc.width = document.documentElement.clientWidth;
+			oc.height = document.documentElement.clientHeight;
+			if(oc.getContext){
+				var ctx = oc.getContext("2d");
+				
+				var img =new Image();
+				img.src="img/a.png";
+				img.onload=function(){
+					draw(this);
+				}
+			}
+			
+			function draw(img){
+				ctx.drawImage(img,0,0,oc.width,oc.height);
+				
+				oc.addEventListener('touchstart',function(ev){
+					var ev =ev||event;
+					var touchC = ev.changedTouches[0];
+					
+					var x = touchC.clientX - this.offsetLeft;
+					var y = touchC.clientY - this.offsetTop;
+					
+					ctx.globalCompositeOperation="destination-out";
+					ctx.lineWidth=50;
+					ctx.lineCap="round";
+					
+					ctx.beginPath();
+					ctx.moveTo(x,y);
+					ctx.lineTo(x+1,y+1);
+					ctx.stroke();
+					
+					
+				});
+				oc.addEventListener('touchmove',function(){
+					var ev =ev||event;
+					var touchC = ev.changedTouches[0];
+					
+					var x = touchC.clientX - this.offsetLeft;
+					var y = touchC.clientY - this.offsetTop;
+					
+					ctx.lineTo(x,y);
+					ctx.stroke();
+				});
+				oc.addEventListener("touchend",function(){
+					
+					var imgData = ctx.getImageData(0,0,oc.width,oc.height);
+					var flag =0;
+					var allPx = imgData.width * imgData.height;
+					for(var i=0;i<allPx;i++){
+						if(imgData.data[4*i+3] == 0){
+							flag++;
+						}
+					}
+					//判断刮层少于50%时就自动清除刮层
+					if(flag > allPx/100){
+						oc.style.opacity=0;
+					}
+					
+				})
+			
+				oc.addEventListener("transitionend",function(){
+					this.remove();
+				/*滑动*/  
+				var wrap =document.querySelector("#wrap");
+				var list =document.querySelector("#list")
+				damu.drag(wrap,list);
+				})
+
+			}
+			
+		
+		}
+
+
+		
+	</script>
+</html>

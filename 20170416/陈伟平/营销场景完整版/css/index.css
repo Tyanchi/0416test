@@ -1,0 +1,225 @@
+/*cssreset start  */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*cssreset end  */
+/*内容容器的样式处理 start  */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Helvetica Neue";
+}
+
+#wrap {
+  height: 100%;
+}
+
+#wrapUl  {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+#guaguaka{
+  position: absolute;
+				left: 0;
+				top: 0;
+  z-index: 99;
+}
+#arrow{
+width: 6rem;
+    height: 3.5rem;
+    background: url(../images/arr.png) no-repeat;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    margin-left: -45px;
+    z-index: 7;
+    animation: arrow 1s infinite;
+}
+@keyframes arrow{
+  0%{
+    opacity: 0.3;
+    transform: translateY(0rem)
+  }
+  40%{
+    opacity: 0.3;
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(-2rem)
+  }
+}
+#wrapUl > li {
+     visibility: hidden; 
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-size: cover;
+    z-index: 5;
+    transform-origin: right;
+    overflow: hidden
+}
+/*内容容器的样式处理 结束  */
+
+/*第一幕 start  */
+#wrapUl>li:nth-child(1) {
+  background: url("../images/b.png");
+  background-size: 100% 100%;
+}
+#wrapUl .proverbs{
+  position: absolute;
+  top:65%;
+  left: 20%;
+  line-height: 1.6rem;
+    font-size: 1.2rem;
+    color: white;
+}
+  /* #wrapUl .proverbs p{
+    transition: 1s;
+  } */
+   #wrapUl .proverbs p:nth-child(2n){
+    transform: translateX(300px);
+    opacity:0;
+  } 
+  #wrapUl .proverbs p:nth-child(2n-1){
+    transform: translateX(-320px);
+    opacity:0;
+  } 
+  /* #wrapUl .proverbs>p{
+    float: left;
+  } 
+/*第一幕 end  */
+/*第二幕 start  */
+
+#wrapUl #tow {
+  background: url("../images/c.png");
+  background-size: 100% 100%;
+}
+/* ul>li:nth-child(2) .course{
+  position: absolute;
+  top: 0;
+  left: 0;
+} */
+#tow .course{
+
+  width: 100%;
+}
+#wrapUl #tow .course > li{
+  width: 5rem;
+    height: 5rem;
+    position: absolute;
+    border-radius: 2.5px;
+   top:53% ;
+    left: 37%;
+}
+/*第二幕 end  */
+/*第三幕 start*/
+#wrapUl > li:nth-child(3) {
+  background: url("../images/d.png");
+  background-size: 100% 100%;
+}
+#wrapUl > li:nth-child(3) .ad{
+  width: 15rem;
+    height: 6.5rem;
+    background: url(../images/d1.png) no-repeat;
+    position: absolute;
+    background-size: 100% 100%;
+    left: 50%;
+    margin-left: -7.5rem;
+    top: 60%;
+    transform: rotateY(720deg)
+}
+/*第三幕 end*/
+/*第四幕 start*/
+#wrapUl > li:nth-child(4) {
+  background: url("../images/e.png");
+  background-size: 100% 100%;
+}
+
+#textContainer .text1{
+  font-size: 1rem;
+    color: white;
+    border: 1px #FFF solid;
+    box-shadow: 0 0 1rem #FFF;
+    border-radius:0.3rem;
+    word-wrap: break-word;
+    position: absolute;
+    overflow: hidden;
+    transform-origin: left top;
+    transform: scale(0)
+}
+  #textContainer .text1:nth-child(1){
+    width: 10rem;
+    height: 9rem;
+    left: 4%;
+    top: 15%;
+  }
+  #textContainer .text1:nth-child(2){
+   width: 11rem;
+    height: 7rem;
+    left: 50%;
+    top: 19%;
+  }
+  #textContainer .text1:nth-child(3){
+      width: 4rem;
+    height: 12rem;
+    left: 83%;
+    top: 75%;
+  }
+/*第四幕 end  */
+#wrapUl > li:nth-child(5) {
+  background: url("../images/f.png");
+  background-size: 100% 100%;
+}
+
+#guaguaka {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: 1s opacity;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+    <title>实战_营销场景</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="css/animation.css">
+</head>
+<body>
+    <div id="wrap">
+        <canvas id="oc"></canvas>
+        <ul class="list">
+           <li class="page page-1">
+               <ul class="content">
+                   <li class="page-fromRight">
+                       <p>曾经做为前端开发的你</p>
+                       <p>解决PC兼容性而焦头烂额</p>
+                   </li>
+                   <li class="page-fromLeft">
+                       <p>而今</p>
+                       <p>移动端H5应用疯狂来袭</p>
+                   </li>
+                   <li class="page-fromRight">
+                       <p>你是否已准备充分</p>
+                       <p>学习新技能</p>
+                   </li>
+                   <li class="page-fromLeft">
+                       <p>曾破茧成蝶、重获新生？</p>
+                   </li>
+               </ul>
+               <img class="imgIcon page-moveTcon" src="img/arr.png">
+           </li>
+           <li class="page page-2 hide">
+               <img class="hide page-oneImg img" src="img/c1.png" >
+               <img class="hide page-twoImg img" src="img/c2.png" >
+               <img class="hide page-threeImg img"src="img/c3.png" >
+               <img class="hide page-fourImg img"src="img/c4.png" >
+               <img class="hide page-fiveImg img"src="img/c5.png" >
+               <img class="hide page-sixImg img" src="img/c6.png" >
+               <img class="hide imgIcon page-moveTcon" src="img/arr.png">
+           </li>
+           <li class="page page-3 hide">
+               <div class="hide text page-moveText"></div>
+               <img class="hide imgIcon page-moveTcon" src="img/arr.png">
+           </li>
+           <li class="page page-4 hide ">
+               <ul class="p4_list">
+                   <li class="page-moveOne">
+                       <p>transform  transition  rotate  scale  translate  keyframes animation  webkitTransitionEnd webkitAnimationIteration elapsedTime perspective…</p>
+                   </li>
+                   <li class="page-moveTwo">
+                       <p>drawImage lineWidth  strokeStyle  lineCap  globalCompositeOperation  moveTo   lineTo  stroke  arc  getImageData…</p>
+                   </li>
+                   <li class="page-moveThree ">
+                       <p>audio autoplay loop  paused  play  pause…</p>
+                   </li>
+               </ul>
+               <img class="imgIcon page-moveTcon" src="img/arr.png">
+           </li>
+           <li class="page page-5 hide">
+               <img class="imgIcon page-moveTcon" src="img/arr.png">
+           </li>
+        </ul>
+        <div class="music">
+            <audio src="img/music.mp3" preload="auto" loop></audio>
+        </div>
+    </div>
+</body>
+<script src="js/zepto.js"></script>
+<script src="js/touch.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
+
+    /*清除默认样式*/
+    document.addEventListener('touchstart',function(ev){
+      var ev = ev || event;
+      ev.preventDefault();
+    });
+
+    /*适配*/
+    (function(){
+
+      var targetW = 640;
+      var width = document.documentElement.clientWidth;
+      var scale = targetW/width;
+
+      var metaNode = document.querySelector("meta[name='viewport']");
+
+      metaNode.setAttribute('content','initial-scale='+scale+',user-scalable=no');
+
+    })();
+
+
+</script>
+</html>
